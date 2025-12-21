@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+jinja2
+cryptography
+argon2-cffi
+pyotp
+qrcode
+python-multipart
