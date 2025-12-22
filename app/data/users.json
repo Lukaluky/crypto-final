@@ -1,0 +1,22 @@
+{
+    "alice": {
+        "password": "$argon2id$v=19$m=65536,t=3,p=4$0ilLn5SbStaX/ZYbKxJR3g$ovERl3VdP1tgHaIZBHfW3wHMcKjry2Z6FkRWK45aop4",
+        "totp_secret": "R2KLOK3QFOGLHPBR2OYHCCDBJW5S3Q5U"
+    },
+    "220107149@stu.sdu.edu.kz": {
+        "password": "$argon2id$v=19$m=65536,t=3,p=4$75NMdzxl/fQNqCjSThWHVg$KgFyGYp1qfR/zLUG8Gb0rBKpw221ixcu4VLWzjIe5tQ",
+        "totp_secret": "S247YXTAOC3SLNCU64G4HC6SUJHWZKA4"
+    },
+    "toqayev": {
+        "password": "$argon2id$v=19$m=65536,t=3,p=4$sXyTCkuzpp0+U2OEEuwwRw$d93I3YC9dpZc9lNJWUAv+jXaMfNpudbI7nuF9HnCMuo",
+        "totp_secret": "LQAPNATUC4XX4SWSCLY63FNT5E4SIRNK"
+    },
+    "nazarbayev": {
+        "password": "$argon2id$v=19$m=65536,t=3,p=4$8hhW/gEcUQiRN6Dhf9Kgrw$+87ux4KqgobPKrpnRIyH7igf4qNRekKtLB4WDpZn7R8",
+        "totp_secret": "DQQSGYFI3FGIGEUB7TKJ56GO3FCQBVOW"
+    },
+    "putin": {
+        "password": "$argon2id$v=19$m=65536,t=3,p=4$LWOdAy4MzE75ih7pay1b7Q$E/Ro8ocFZoOmEUkez3AAVZ40XPeIHd3wts7yaiux8eY",
+        "totp_secret": "AJSCTNGATSEUJWHB4BOTMRL573G2ZMHH"
+    }
+}

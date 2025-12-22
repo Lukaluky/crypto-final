@@ -1,0 +1,24 @@
+[
+    {
+        "index": 0,
+        "timestamp": 1766425291.6363704,
+        "transactions": [
+            "Genesis Block"
+        ],
+        "merkle_root": "Genesis Block",
+        "previous_hash": "0",
+        "nonce": 0,
+        "hash": "bc6afdd7a31099a03ea72ee29c2e54f7e1cfbc90a79d44c082c0d43fcc7d1f5b"
+    },
+    {
+        "index": 1,
+        "timestamp": 1766425291.6367438,
+        "transactions": [
+            "File decrypted by nazarbayev"
+        ],
+        "merkle_root": "File decrypted by nazarbayev",
+        "previous_hash": "bc6afdd7a31099a03ea72ee29c2e54f7e1cfbc90a79d44c082c0d43fcc7d1f5b",
+        "nonce": 725,
+        "hash": "000bf926c0f4fec025d593c61a3b0c81eff57412aaa75177bdfce4b3027b6e76"
+    }
+]

@@ -1,51 +1,70 @@
-import json, secrets, hmac, time
+# app/auth/auth.py
+# User authentication
+
+import json
+import os
 from argon2 import PasswordHasher
-from app.core.sha256 import sha256
+from app.auth.totp import generate_totp_secret, verify_totp
+from app.blockchain.blockchain import Blockchain
 
 ph = PasswordHasher()
+USERS_FILE = "app/data/users.json"
+SESSIONS_FILE = "app/data/sessions.json"
 
-USERS = "app/data/users.json"
-SESSIONS = "app/data/sessions.json"
 
-def load(path):
-    try:
-        with open(path, "r") as f:
-            return json.load(f)
-    except:
+def load_json(path):
+    if not os.path.exists(path):
         return {}
+    with open(path, "r") as f:
+        return json.load(f)
 
-def save(path, data):
+
+def save_json(path, data):
     with open(path, "w") as f:
-        json.dump(data, f, indent=2)
+        json.dump(data, f, indent=4)
 
-def register(username, password, totp_secret):
-    users = load(USERS)
+
+def register_user(username, password):
+    users = load_json(USERS_FILE)
     if username in users:
-        raise ValueError("User exists")
+        raise ValueError("User already exists")
+
+    password_hash = ph.hash(password)
+    totp_secret = generate_totp_secret()
 
     users[username] = {
-        "password": ph.hash(password),
-        "totp": totp_secret
+        "password": password_hash,
+        "totp_secret": totp_secret
     }
-    save(USERS, users)
 
-def login(username, password):
-    users = load(USERS)
+    save_json(USERS_FILE, users)
+
+    bc = Blockchain()
+    bc.add_block([f"User {username} registered"])
+    bc.save()
+
+    return totp_secret
+
+
+def login_user(username, password, totp_code):
+    users = load_json(USERS_FILE)
     if username not in users:
-        return None
+        return False
 
     try:
         ph.verify(users[username]["password"], password)
     except:
-        return None
+        return False
 
-    token = hmac.new(
-        secrets.token_bytes(32),
-        f"{username}{time.time()}".encode(),
-        "sha256"
-    ).hexdigest()
+    if not verify_totp(users[username]["totp_secret"], totp_code):
+        return False
 
-    sessions = load(SESSIONS)
-    sessions[token] = username
-    save(SESSIONS, sessions)
-    return token
+    sessions = load_json(SESSIONS_FILE)
+    sessions[username] = True
+    save_json(SESSIONS_FILE, sessions)
+
+    bc = Blockchain()
+    bc.add_block([f"User {username} logged in"])
+    bc.save()
+
+    return True

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+
+</head>
+<body>
+    <h2>Welcome, {{ user }}</h2>
+
+    <div class="container">
+    <h2>Send Message</h2>
+    <form method="post" action="/send">
+        <label for="receiver">Receiver</label>
+        <input type="text" name="receiver" id="receiver" placeholder="Receiver username" required>
+
+        <label for="message">Message</label>
+        <input type="text" name="message" id="message" placeholder="Type your message..." required>
+
+        <button type="submit">Send</button>
+    </form>
+
+    <h3>Your Messages</h3>
+    <ul class="messages">
+        {% for msg in messages %}
+            <li><b>{{ msg.from }}:</b> {{ msg.message }}</li>
+        {% endfor %}
+    </ul>
+    </div>
+
+
+    <hr>
+
+    <h2>File Encryption System</h2>
+
+    <h3>Encrypt File</h3>
+    <form action="/encrypt-file" method="post" enctype="multipart/form-data">
+        <label for="encryptFile">Choose file to encrypt:</label>
+        <input type="file" id="encryptFile" name="file" required>
+        <button type="submit">Encrypt</button>
+    </form>
+
+    <h3>Decrypt File</h3>
+    <form action="/decrypt-file" method="post" enctype="multipart/form-data">
+        <label for="decryptFile">Choose file to decrypt:</label>
+        <input type="file" id="decryptFile" name="file" required>
+        <button type="submit">Decrypt</button>
+    </form>
+
+    <a href="/" class="logout">Logout</a>
+</body>
+</html>
