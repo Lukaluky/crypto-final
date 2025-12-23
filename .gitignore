@@ -1,0 +1,22 @@
+# Virtual environment
+venv/
+.env/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Sensitive application data
+app/data/users.json
+app/data/keys.json
+app/data/sessions.json
+app/data/messages.json
+app/data/blockchain.json
+
+# Temporary files
+app/temp/
+*.enc
+
+# OS files
+.DS_Store
+Thumbs.db
