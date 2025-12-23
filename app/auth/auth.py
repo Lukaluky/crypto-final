@@ -4,30 +4,51 @@
 import json
 import os
 from argon2 import PasswordHasher
+
 from app.auth.totp import generate_totp_secret, verify_totp
 from app.blockchain.blockchain import Blockchain
 
 ph = PasswordHasher()
-USERS_FILE = "app/data/users.json"
-SESSIONS_FILE = "app/data/sessions.json"
+
+# --- Paths ---
+DATA_DIR = "app/data"
+USERS_FILE = os.path.join(DATA_DIR, "users.json")
+SESSIONS_FILE = os.path.join(DATA_DIR, "sessions.json")
+
+# Ensure data directory exists
+os.makedirs(DATA_DIR, exist_ok=True)
 
 
 def load_json(path):
+    """
+    Safe JSON loader:
+    - returns {} if file does not exist
+    - returns {} if file is empty or corrupted
+    """
     if not os.path.exists(path):
         return {}
-    with open(path, "r") as f:
-        return json.load(f)
+
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            content = f.read().strip()
+            if not content:
+                return {}
+            return json.loads(content)
+    except (json.JSONDecodeError, IOError):
+        return {}
 
 
 def save_json(path, data):
-    with open(path, "w") as f:
+    with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=4)
 
 
 def register_user(username, password):
     users = load_json(USERS_FILE)
+
     if username in users:
-        raise ValueError("User already exists")
+        # Явно возвращаем None вместо краша сервера
+        return None
 
     password_hash = ph.hash(password)
     totp_secret = generate_totp_secret()
@@ -39,6 +60,7 @@ def register_user(username, password):
 
     save_json(USERS_FILE, users)
 
+    # Blockchain log
     bc = Blockchain()
     bc.add_block([f"User {username} registered"])
     bc.save()
@@ -48,12 +70,13 @@ def register_user(username, password):
 
 def login_user(username, password, totp_code):
     users = load_json(USERS_FILE)
+
     if username not in users:
         return False
 
     try:
         ph.verify(users[username]["password"], password)
-    except:
+    except Exception:
         return False
 
     if not verify_totp(users[username]["totp_secret"], totp_code):
@@ -63,6 +86,7 @@ def login_user(username, password, totp_code):
     sessions[username] = True
     save_json(SESSIONS_FILE, sessions)
 
+    # Blockchain log
     bc = Blockchain()
     bc.add_block([f"User {username} logged in"])
     bc.save()

@@ -1,21 +1,24 @@
 # app/blockchain/blockchain.py
-# Simple Blockchain Audit Ledger
+# Simple Blockchain Audit Ledger (persistent)
 
 import json
 import time
+import os
 from app.core.sha256 import sha256
 from app.core.merkle import merkle_root
 
+BLOCKCHAIN_FILE = "app/data/blockchain.json"
+
 
 class Block:
-    def __init__(self, index, timestamp, transactions, previous_hash, nonce=0):
+    def __init__(self, index, timestamp, transactions, previous_hash, nonce=0, hash_value=None):
         self.index = index
         self.timestamp = timestamp
         self.transactions = transactions
         self.merkle_root = merkle_root(transactions)
         self.previous_hash = previous_hash
         self.nonce = nonce
-        self.hash = self.compute_hash()
+        self.hash = hash_value or self.compute_hash()
 
     def compute_hash(self):
         block_string = (
@@ -30,20 +33,33 @@ class Block:
 
 
 class Blockchain:
-    difficulty = 3  # number of leading zeros
+    difficulty = 3
 
-    def __init__(self):
+    def __init__(self, filename="app/data/blockchain.json"):
+        self.filename = filename
         self.chain = []
-        self.create_genesis_block()
 
-    def create_genesis_block(self):
-        genesis = Block(
-            index=0,
-            timestamp=time.time(),
-            transactions=["Genesis Block"],
-            previous_hash="0"
-        )
-        self.chain.append(genesis)
+        if os.path.exists(self.filename):
+            self.load()
+        else:
+            self.create_genesis_block()
+            self.save()
+
+    def load(self):
+        with open(self.filename, "r") as f:
+            data = json.load(f)
+
+        self.chain = []
+        for b in data:
+            block = Block(
+                b["index"],
+                b["timestamp"],
+                b["transactions"],
+                b["previous_hash"],
+                b["nonce"]
+            )
+            block.hash = b["hash"]
+            self.chain.append(block)
 
     def last_block(self):
         return self.chain[-1]
@@ -69,6 +85,7 @@ class Blockchain:
 
         self.proof_of_work(new_block)
         self.chain.append(new_block)
+        self.save()
 
     def is_chain_valid(self):
         for i in range(1, len(self.chain)):
@@ -83,6 +100,6 @@ class Blockchain:
 
         return True
 
-    def save(self, filename="app/data/blockchain.json"):
-        with open(filename, "w") as f:
+    def save(self):
+        with open(BLOCKCHAIN_FILE, "w") as f:
             json.dump([block.__dict__ for block in self.chain], f, indent=4)

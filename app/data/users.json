@@ -18,5 +18,41 @@
     "putin": {
         "password": "$argon2id$v=19$m=65536,t=3,p=4$LWOdAy4MzE75ih7pay1b7Q$E/Ro8ocFZoOmEUkez3AAVZ40XPeIHd3wts7yaiux8eY",
         "totp_secret": "AJSCTNGATSEUJWHB4BOTMRL573G2ZMHH"
+    },
+    "tramp": {
+        "password": "$argon2id$v=19$m=65536,t=3,p=4$XYuN3GEDhe1HOvDml1Dkug$52UYarclfD1vo8ZPzpfaB9Fcq58n/W/0rTR990IWe8E",
+        "totp_secret": "T5DPD6N3ZIOOUT54JHGW22DK5ZLRWAFJ"
+    },
+    "qonayev": {
+        "password": "$argon2id$v=19$m=65536,t=3,p=4$xCq6mb9w6PwXXtv/QLPAvQ$HSTUJUVGgupSODFUFNAhPmZ+uEIPudWGPtypSW+3DWI",
+        "totp_secret": "QGFCRIZBX5KBWKT75WAYL6CAPP27IG3R"
+    },
+    "Lukas": {
+        "password": "$argon2id$v=19$m=65536,t=3,p=4$NsbIXigQEKS1Q16v95JdAQ$Z3uELmMcVzqdcOS59PbEUqopGiVMMkfsGO35+w6zgqw",
+        "totp_secret": "BIMVSANAWJDJS6V4VGRCI4EA62OFNOPM"
+    },
+    "Luka": {
+        "password": "$argon2id$v=19$m=65536,t=3,p=4$XP2QFI8HooLv0Y+HvFgyRQ$hGL7xpUc0UVSXHUcd2DCN9HOj14WzkHSANgg/8AysZ8",
+        "totp_secret": "AW5RU5LGN33ZBW67BEQHJ6IBA5LREYL2"
+    },
+    "luka": {
+        "password": "$argon2id$v=19$m=65536,t=3,p=4$SdRtXcE/dCCI0hH3crFoRw$AIEkv9V1Gy5Sj6bDGSl4Jul1rM//L3qZIY1lNnwt0cU",
+        "totp_secret": "XGHJUAFJGUNGMVKGBPXATI3N377DMI6N"
+    },
+    "Lukman": {
+        "password": "$argon2id$v=19$m=65536,t=3,p=4$iSP7RDiXyRPswz+3ELe5WQ$SoM49Ejyb0u2Ium7a6dpk+v+qOe236gSMo3TJVG4wqk",
+        "totp_secret": "WBNKD5ZBDAVFQL5QTFCK33UQ4A2ZOIIB"
+    },
+    "Lukaks": {
+        "password": "$argon2id$v=19$m=65536,t=3,p=4$nmE6HiQeNUuTUkWQgQ/r2A$VFovGujOP+hwD2y9yR4AE4BjrS/TGhrncuNunThQnVs",
+        "totp_secret": "5O37ZGAIGMDMNOGWR6S52TXFZIPZEHQC"
+    },
+    "lukaks": {
+        "password": "$argon2id$v=19$m=65536,t=3,p=4$UueVFiCGc/EtyH+wSoThKA$WARNDro2Mw8a5+yNLw4NAqX4PxWYEMO1t0X2hn/KNls",
+        "totp_secret": "QY76CQHUC6DFTNUWH4WQQ3JOA7LB3MZV"
+    },
+    "Lukaman": {
+        "password": "$argon2id$v=19$m=65536,t=3,p=4$43lGX10UJqiZrcmis7QZRA$qOU86rLLty3/UYp+TaOg8tnNW3hZRvb1/SBKIIGtHYA",
+        "totp_secret": "BJMJFTWSBYC76LNAKT6BSMW7AQ36VUC3"
     }
 }
