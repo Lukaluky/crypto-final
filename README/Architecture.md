@@ -1,7 +1,7 @@
 
 ---
 
-## **architecture.md**
+
 
 ```markdown
 # CryptoVault – System Architecture
@@ -12,13 +12,11 @@ CryptoVault is designed as a **modular security system** with clear separation o
 
 ## High-Level Architecture
 
-Browser (UI)
-↓
-FastAPI Backend
-↓
-Security Modules
-↓
-Blockchain Audit Ledger
+- Browser (UI)
+- FastAPI Backend
+- Security Modules
+- Blockchain Audit Ledger
+
 
 
 ---
