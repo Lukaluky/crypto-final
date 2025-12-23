@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blockchain Audit Ledger</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h2>Blockchain Audit Ledger</h2>
+
+    <p>
+        Status:
+        {% if valid %}
+            <b style="color:green">VALID</b>
+        {% else %}
+            <b style="color:red">INVALID</b>
+        {% endif %}
+    </p>
+
+    <hr>
+
+    {% for block in chain %}
+        <h3>Block #{{ block.index }}</h3>
+        <p><b>Timestamp:</b> {{ block.timestamp }}</p>
+        <p><b>Previous hash:</b> {{ block.previous_hash }}</p>
+        <p><b>Merkle root:</b> {{ block.merkle_root }}</p>
+        <p><b>Nonce:</b> {{ block.nonce }}</p>
+        <p><b>Hash:</b> {{ block.hash }}</p>
+
+        <b>Transactions:</b>
+        <ul>
+            {% for tx in block.transactions %}
+                <li>{{ tx }}</li>
+            {% endfor %}
+        </ul>
+
+        <hr>
+    {% endfor %}
+
+    <a href="/dashboard?user={{ request.cookies.get('user') }}">Back</a>
+</body>
+</html>

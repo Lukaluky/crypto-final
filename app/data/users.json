@@ -18,5 +18,13 @@
     "putin": {
         "password": "$argon2id$v=19$m=65536,t=3,p=4$LWOdAy4MzE75ih7pay1b7Q$E/Ro8ocFZoOmEUkez3AAVZ40XPeIHd3wts7yaiux8eY",
         "totp_secret": "AJSCTNGATSEUJWHB4BOTMRL573G2ZMHH"
+    },
+    "tramp": {
+        "password": "$argon2id$v=19$m=65536,t=3,p=4$XYuN3GEDhe1HOvDml1Dkug$52UYarclfD1vo8ZPzpfaB9Fcq58n/W/0rTR990IWe8E",
+        "totp_secret": "T5DPD6N3ZIOOUT54JHGW22DK5ZLRWAFJ"
+    },
+    "qonayev": {
+        "password": "$argon2id$v=19$m=65536,t=3,p=4$xCq6mb9w6PwXXtv/QLPAvQ$HSTUJUVGgupSODFUFNAhPmZ+uEIPudWGPtypSW+3DWI",
+        "totp_secret": "QGFCRIZBX5KBWKT75WAYL6CAPP27IG3R"
     }
 }
