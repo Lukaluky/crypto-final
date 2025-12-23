@@ -1,71 +1,46 @@
+# CryptoVault – Security Analysis
+
+This document describes potential threats and their mitigations.
 
 ---
 
-## ** architecture.md**
+## Threat Model
 
-```markdown
-# CryptoVault – System Architecture
+**1. Password Theft**  
+- **Threat:** Attacker steals the database  
+- **Mitigation:**  
+  - Argon2 password hashing  
+  - No plaintext passwords stored  
 
-CryptoVault is designed as a **modular security system** with clear separation of concerns.
+**2. Account Takeover**  
+- **Threat:** Stolen credentials  
+- **Mitigation:**  
+  - TOTP-based 2FA  
+  - Integration with Google Authenticator  
 
----
+**3. Message Interception**  
+- **Threat:** Man-in-the-middle attack  
+- **Mitigation:**  
+  - RSA encryption of messages  
+  - Messages stored only in encrypted form  
 
-## High-Level Architecture
+**4. File Tampering**  
+- **Threat:** Unauthorized file access  
+- **Mitigation:**  
+  - Encrypted files with user-specific keys  
 
-Browser (UI)
-↓
-FastAPI Backend
-↓
-Security Modules
-↓
-Blockchain Audit Ledger
-
-
----
-
-## Project Structure
-
-app/
-├── auth/ # Authentication + TOTP
-├── messaging/ # Secure messaging
-├── files/ # File encryption
-├── blockchain/ # Audit ledger
-├── core/ # Cryptographic primitives
-├── templates/ # HTML user interface
-└── main.py
-
+**5. Log Manipulation**  
+- **Threat:** Deleting or editing logs  
+- **Mitigation:**  
+  - Blockchain audit ledger  
+  - Hash chaining and Proof-of-Work  
 
 ---
 
-## Modules
+## Security Conclusion
 
-**Authentication Module**  
-- Password hashing with Argon2  
-- TOTP-based 2FA  
-- Session management  
+CryptoVault applies **layered security**:  
 
-**Secure Messaging Module**  
-- RSA key generation per user  
-- Message encryption using public keys  
-- Message decryption using private keys  
-
-**File Encryption Module**  
-- Per-user file encryption  
-- Secure file storage  
-- Controlled decryption  
-
-**Blockchain Audit Ledger**  
-- Immutable logging of security events  
-- Proof-of-Work  
-- Merkle tree validation  
-
----
-
-## Design Principles
-
-- Modularity  
-- Defense in depth  
-- Cryptography-first design  
-- Auditability  
-
-
+- Strong cryptography  
+- Secure authentication  
+- Auditability via blockchain
